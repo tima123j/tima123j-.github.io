@@ -1,0 +1,23 @@
+<html><head></head><body>
+    <script>
+      console.log(navigator);
+    </script>
+    with update <hr>
+    heyy its qqqqqqqqqqqqqqqqqqa test site
+    a new update
+  
+ 
+<script>
+const express = require('express');
+const app = express();
+
+app.get('/get-ip', (req, res) => {
+  const clientIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  res.send({ ip: clientIp });
+});
+
+app.listen(3000, () => {
+  console.log('Server running on port 3000');
+});
+    </script></body></html>
+
