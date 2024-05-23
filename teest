@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Local IP Address</title>
+</head>
+<body>
+    <h1>Your Local IP Address</h1>
+    <p id="local-ip"></p>
+
+    <script>
+        // Function to get the local IP address
+        function getLocalIP(callback) {
+            var RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
+            var pc = new RTCPeerConnection({iceServers: []}), noop = function() {};
+            pc.createDataChannel('');
+            pc.createOffer(pc.setLocalDescription.bind(pc), noop);
+
+            pc.onicecandidate = function(event) {
+                if (event && event.candidate && event.candidate.candidate) {
+                    var localIP = event.candidate.candidate.split('\n')[0].split(' ')[4];
+                    callback(localIP);
+                    pc.onicecandidate = noop;
+                }
+            };
+        }
+
+        // Display the local IP address
+        getLocalIP(function(ip) {
+            document.getElementById("local-ip").textContent = ip;
+        });
+    </script>
+</body>
+</html>
