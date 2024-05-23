@@ -1,0 +1,13 @@
+<html>
+
+  <body>
+    hey
+    <script>
+      function getIPFromAmazon() {
+  fetch("https://checkip.amazonaws.com/").then(res => res.text()).then(data => console.log(data))
+}
+ 
+document.write(getIPFromAmazon())
+    </script>
+  </body>
+</html>
