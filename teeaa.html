@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Website IP Address</title>
+</head>
+<body>
+    <h1>IP Address of the Website</h1>
+    <p id="website-ip">Fetching...</p>
+
+    <script>
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    document.getElementById("website-ip").textContent = response.ip;
+                } else {
+                    document.getElementById("website-ip").textContent = "Failed to retrieve IP address.";
+                }
+            }
+        };
+        xhr.open("GET", "https://ipinfo.io/json", true);
+        xhr.send();
+    </script>
+</body>
+</html>
