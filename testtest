@@ -1,0 +1,20 @@
+<html><head></head><body>
+    <script>
+      console.log(navigator);
+    </script>
+    with update <hr>
+    heyy its qqqqqqqqqqqqqqqqqqa test site
+    a new update
+  
+ 
+<script>
+fetch('https://api.ipify.org?format=json')
+  .then(response => response.json())
+  .then(data => {
+    console.log('Your Public IP Address:', data.ip);
+  })
+  .catch(error => {
+    console.error('Error fetching IP:', error);
+  });
+    </script></body></html>
+
