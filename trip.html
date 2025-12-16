@@ -25,15 +25,18 @@
         }
 
         /* --- Gallery Container (Main Content) --- */
-        .gallery-container {
-            flex: 2; /* Takes up 2/3 of the space */
-        }
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 columns */
-            gap: 20px;
-            margin-top: 10px;
-        }
+       /* --- Gallery Container (Main Content) --- */
+.gallery-container {
+    flex: 2;
+}
+.gallery {
+    display: grid;
+    /* Keeps the 3-column layout */
+    grid-template-columns: repeat(3, 1fr); 
+    /* Adjusting gap for better spacing */
+    gap: 15px; /* Use a specific pixel value for clear spacing */ 
+    margin-top: 10px;
+}
         .item-container {
             text-align: center;
             cursor: pointer;
