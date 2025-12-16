@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Cost Calculator</title>
+    <style>
+        /* --- CSS Styling for Layout and Interactivity --- */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+        .gallery {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        .item-container {
+            width: 150px;
+            text-align: center;
+            cursor: pointer;
+            position: relative; /* Needed for absolute positioning of selection marker */
+        }
+        .item-image {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border: 3px solid transparent;
+            border-radius: 8px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        /* Style for when the checkbox is checked (i.e., when the item is selected) */
+        .item-container input[type="checkbox"]:checked ~ .item-image {
+            border-color: #007bff; /* Blue border */
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+        }
+        .item-info {
+            margin-top: 5px;
+            font-size: 0.9em;
+        }
+        .total-display {
+            text-align: center;
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #333;
+            padding: 15px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            background-color: #fff;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        /* Hide the actual checkbox input */
+        .item-container input[type="checkbox"] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>🖼️ Trip Item Selector</h2>
+    <p>Click on the items you want to include in your trip to instantly calculate the total cost.</p>
+
+    <div class="gallery">
+
+        <label for="item1" class="item-container" data-cost="500">
+            <input type="checkbox" id="item1" onchange="calculateTotal()">
+            <img src="https://via.placeholder.com/150/007bff/FFFFFF?text=Flight" alt="Flight" class="item-image">
+            <div class="item-info">Flight Ticket ($500)</div>
+        </label>
+
+        <label for="item2" class="item-container" data-cost="800">
+            <input type="checkbox" id="item2" onchange="calculateTotal()">
+            <img src="https://via.placeholder.com/150/28a745/FFFFFF?text=Hotel" alt="Hotel" class="item-image">
+            <div class="item-info">Hotel Stay ($800)</div>
+        </label>
+
+        <label for="item3" class="item-container" data-cost="250">
+            <input type="checkbox" id="item3" onchange="calculateTotal()">
+            <img src="https://via.placeholder.com/150/ffc107/333333?text=Car" alt="Rental Car" class="item-image">
+            <div class="item-info">Rental Car ($250)</div>
+        </label>
+
+        <label for="item4" class="item-container" data-cost="150">
+            <input type="checkbox" id="item4" onchange="calculateTotal()">
+            <img src="https://via.placeholder.com/150/dc3545/FFFFFF?text=Activity" alt="Activities" class="item-image">
+            <div class="item-info">Activities Pkg ($150)</div>
+        </label>
+
+    </div>
+
+    <div class="total-display">
+        Total Cost: $<span id="total-price">0.00</span>
+    </div>
+
+    <script>
+        // --- JavaScript Logic for Calculation ---
+        
+        // Define the main function to run on every selection change
+        function calculateTotal() {
+            let total = 0;
+            
+            // 1. Get all the checkbox inputs
+            const checkboxes = document.querySelectorAll('.item-container input[type="checkbox"]');
+            
+            // 2. Loop through each checkbox
+            checkboxes.forEach(checkbox => {
+                // Check if the current item is selected
+                if (checkbox.checked) {
+                    // Get the cost from the parent container's 'data-cost' attribute
+                    const cost = parseFloat(checkbox.parentElement.getAttribute('data-cost'));
+                    
+                    // Add the cost to the running total
+                    if (!isNaN(cost)) {
+                        total += cost;
+                    }
+                }
+            });
+            
+            // 3. Update the display with the new total
+            const totalDisplayElement = document.getElementById('total-price');
+            
+            // Format the number to two decimal places (currency format)
+            totalDisplayElement.textContent = total.toFixed(2);
+        }
+        
+        // Optional: Call the function once on load to ensure the initial display is '0.00'
+        document.addEventListener('DOMContentLoaded', calculateTotal);
+    </script>
+
+</body>
+</html>
